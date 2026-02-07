@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>McVendors</title>
+  <meta name="description" content="Quick links to McVendors partners." />
+  <style>
+    :root{
+      --bg1:#070A12;
+      --bg2:#0B1224;
+      --card:#0B1020CC;
+      --stroke:#1F2A44;
+      --text:#EAF0FF;
+      --muted:#9FB0D8;
+      --accent:#7C3AED;
+      --accent2:#22D3EE;
+      --shadow: 0 20px 60px rgba(0,0,0,.45);
+      --radius: 18px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color:var(--text);
+      background:
+        radial-gradient(1200px 600px at 20% 15%, rgba(124,58,237,.35), transparent 55%),
+        radial-gradient(900px 500px at 85% 30%, rgba(34,211,238,.25), transparent 55%),
+        radial-gradient(900px 700px at 50% 110%, rgba(124,58,237,.18), transparent 55%),
+        linear-gradient(180deg, var(--bg1), var(--bg2));
+      overflow-x:hidden;
+    }
+
+    .wrap{
+      min-height:100%;
+      display:grid;
+      place-items:center;
+      padding:28px 16px;
+    }
+
+    .card{
+      width:min(620px, 100%);
+      background:var(--card);
+      border:1px solid rgba(31,42,68,.65);
+      border-radius:var(--radius);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      position:relative;
+      overflow:hidden;
+    }
+    .card::before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background: radial-gradient(600px 220px at 15% 0%, rgba(124,58,237,.35), transparent 50%),
+                  radial-gradient(500px 220px at 90% 20%, rgba(34,211,238,.22), transparent 55%);
+      pointer-events:none;
+      opacity:.9;
+      filter:saturate(1.2);
+    }
+
+    .inner{
+      position:relative;
+      padding:28px;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      margin-bottom:14px;
+    }
+    .logo{
+      width:44px;height:44px;border-radius:14px;
+      background: linear-gradient(135deg, rgba(124,58,237,1), rgba(34,211,238,1));
+      display:grid;place-items:center;
+      box-shadow: 0 12px 30px rgba(124,58,237,.25);
+      border:1px solid rgba(255,255,255,.15);
+      flex:0 0 auto;
+    }
+    .logo svg{width:24px;height:24px;filter:drop-shadow(0 6px 16px rgba(0,0,0,.25))}
+    h1{
+      margin:0;
+      font-size:24px;
+      letter-spacing:.3px;
+      line-height:1.2;
+    }
+    .sub{
+      margin:8px 0 0;
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.5;
+    }
+
+    .grid{
+      margin-top:18px;
+      display:grid;
+      gap:14px;
+    }
+
+    .link{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      padding:16px 16px;
+      border-radius:16px;
+      border:1px solid rgba(31,42,68,.85);
+      background: linear-gradient(180deg, rgba(10,16,32,.75), rgba(10,16,32,.35));
+      text-decoration:none;
+      color:var(--text);
+      transform: translateZ(0);
+      transition: transform .18s ease, border-color .18s ease, background .18s ease;
+      position:relative;
+      overflow:hidden;
+    }
+    .link::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background: radial-gradient(500px 140px at 20% 10%, rgba(124,58,237,.22), transparent 55%),
+                  radial-gradient(500px 140px at 90% 20%, rgba(34,211,238,.18), transparent 55%);
+      opacity:0;
+      transition: opacity .18s ease;
+      pointer-events:none;
+    }
+    .link:hover{
+      transform: translateY(-2px);
+      border-color: rgba(124,58,237,.55);
+      background: linear-gradient(180deg, rgba(10,16,32,.9), rgba(10,16,32,.45));
+    }
+    .link:hover::after{opacity:1}
+
+    .left{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      min-width:0;
+    }
+    .icon{
+      width:42px;height:42px;border-radius:14px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      display:grid;place-items:center;
+      flex:0 0 auto;
+    }
+    .icon svg{width:22px;height:22px;opacity:.95}
+    .title{
+      font-size:16px;
+      font-weight:700;
+      margin:0;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+    .desc{
+      margin:4px 0 0;
+      font-size:13px;
+      color:var(--muted);
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:10px 12px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.05);
+      color: rgba(234,240,255,.92);
+      font-size:13px;
+      flex:0 0 auto;
+    }
+    .pill svg{width:16px;height:16px;opacity:.95}
+
+    .footer{
+      margin-top:18px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+      color: rgba(159,176,216,.9);
+      font-size:12px;
+      border-top:1px solid rgba(31,42,68,.55);
+      padding-top:14px;
+    }
+    .hint{
+      display:flex;
+      align-items:center;
+      gap:8px;
+    }
+    .dot{
+      width:8px;height:8px;border-radius:50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      box-shadow: 0 10px 18px rgba(124,58,237,.25);
+    }
+
+    @media (max-width:420px){
+      .inner{padding:22px}
+      .pill{display:none}
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="card" aria-label="McVendors Links">
+      <div class="inner">
+        <div class="brand">
+          <div class="logo" aria-hidden="true">
+            <!-- simple "M" mark -->
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M4 18V6h3.3l4.7 6 4.7-6H20v12h-3V11l-5 6-5-6v7H4z" fill="white"/>
+            </svg>
+          </div>
+          <div>
+            <h1>McVendors</h1>
+            <p class="sub">Tap a vendor to open the Shopify product page.</p>
+          </div>
+        </div>
+
+        <div class="grid">
+          <a class="link" href="https://mcvendors-2.myshopify.com/products/cologne-vendor" target="_blank" rel="noopener">
+            <div class="left">
+              <div class="icon" aria-hidden="true">
+                <!-- fragrance icon -->
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M9 7h6v3H9V7z" stroke="white" stroke-width="1.6" opacity=".9"/>
+                  <path d="M8 10h8v10a2 2 0 0 1-2 2H10a2 2 0 0 1-2-2V10z" stroke="white" stroke-width="1.6"/>
+                  <path d="M12 12.5c1.7 1 2.7 2.2 2.7 3.6 0 1.7-1.2 2.9-2.7 2.9s-2.7-1.2-2.7-2.9c0-1.4 1-2.6 2.7-3.6z" fill="white" opacity=".12"/>
+                </svg>
+              </div>
+              <div style="min-width:0">
+                <p class="title">Cologne Vendor</p>
+                <p class="desc">Shop fragrances • Checkout on Shopify</p>
+              </div>
+            </div>
+            <span class="pill">
+              Open
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M7 17L17 7" stroke="white" stroke-width="1.6" stroke-linecap="round"/>
+                <path d="M10 7h7v7" stroke="white" stroke-width="1.6" stroke-linecap="round"/>
+              </svg>
+            </span>
+          </a>
+
+          <a class="link" href="https://mcvendors-2.myshopify.com/products/electronics-vendor" target="_blank" rel="noopener">
+            <div class="left">
+              <div class="icon" aria-hidden="true">
+                <!-- electronics icon -->
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M7 4h10a2 2 0 0 1 2 2v10H5V6a2 2 0 0 1 2-2z" stroke="white" stroke-width="1.6"/>
+                  <path d="M4 18h16" stroke="white" stroke-width="1.6" stroke-linecap="round"/>
+                  <path d="M9 20h6" stroke="white" stroke-width="1.6" stroke-linecap="round"/>
+                  <path d="M9 8h6" stroke="white" stroke-width="1.6" stroke-linecap="round" opacity=".8"/>
+                </svg>
+              </div>
+              <div style="min-width:0">
+                <p class="title">Electronics Vendor</p>
+                <p class="desc">Tech & accessories • Checkout on Shopify</p>
+              </div>
+            </div>
+            <span class="pill">
+              Open
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M7 17L17 7" stroke="white" stroke-width="1.6" stroke-linecap="round"/>
+                <path d="M10 7h7v7" stroke="white" stroke-width="1.6" stroke-linecap="round"/>
+              </svg>
+            </span>
+          </a>
+        </div>
+
+        <div class="footer">
+          <div class="hint"><span class="dot"></span><span>Secure checkout via Shopify</span></div>
+          <div>© <span id="y"></span> McVendors</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    document.getElementById("y").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
